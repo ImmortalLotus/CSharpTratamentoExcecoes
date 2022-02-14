@@ -53,6 +53,10 @@ namespace ByteBank
 
         public void Sacar(double valor)
         {
+            if (valor < 0)
+            {
+                throw new ArgumentException(" O valor não pode ser menor que 0 ");
+            }
             if (_saldo < valor)
             {
                 throw new SaldoInsuficienteException("burro não pode ter menos dinheiro do que você quer sacar");
@@ -67,16 +71,22 @@ namespace ByteBank
         }
 
 
-        public bool Transferir(double valor, ContaCorrente contaDestino)
+        public void Transferir(double valor, ContaCorrente contaDestino)
         {
-            if (_saldo < valor)
+            if (valor < 0)
             {
-                return false;
+                throw new ArgumentException(" O valor não pode ser menor que 0 ");
             }
-
+            try {
+                Sacar(valor);
+            }
+            catch (SaldoInsuficienteException ex)
+            {
+                throw ex;
+            }
+           
             _saldo -= valor;
             contaDestino.Depositar(valor);
-            return true;
         }
     }
 }
