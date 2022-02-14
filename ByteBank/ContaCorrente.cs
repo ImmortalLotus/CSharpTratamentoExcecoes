@@ -53,6 +53,10 @@ namespace ByteBank
 
         public void Sacar(double valor)
         {
+            if (valor < 0)
+            {
+                throw new ArgumentException(" O valor não pode ser menor que 0 ");
+            }
             if (_saldo < valor)
             {
                 throw new SaldoInsuficienteException("burro não pode ter menos dinheiro do que você quer sacar");
@@ -67,16 +71,35 @@ namespace ByteBank
         }
 
 
-        public bool Transferir(double valor, ContaCorrente contaDestino)
+        public void Transferir(double valor, ContaCorrente contaDestino)
         {
-            if (_saldo < valor)
+            if (valor < 0)
             {
-                return false;
+                throw new ArgumentException(" O valor não pode ser menor que 0 ");
+            }
+            try {
+                Sacar(valor);
+            }
+            catch (SaldoInsuficienteException ex)
+            {
+                throw new Exception("O valor de saque excede o valor de dinheiro da conta",ex);
+            }
+            finally
+            {
+                Console.WriteLine("independentemente, eu apareço");
             }
 
+            /**
+             * 
+             * O negócio using é a mesma coisa que um try .. finally, 
+             * que por sua vez deve ser usado quando você tem um erro que você não 
+             * quer/não pode tratar e decide tratar mais em cima, mas que de qualquer 
+             * forma deixa algo que você tem que fechar, a exemplo de ler arquivos
+             *
+              **/
+           
             _saldo -= valor;
             contaDestino.Depositar(valor);
-            return true;
         }
     }
 }
