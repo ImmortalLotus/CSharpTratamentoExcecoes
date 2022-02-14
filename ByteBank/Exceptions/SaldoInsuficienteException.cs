@@ -12,7 +12,7 @@ namespace ByteBank.Exceptions
         public double Valor { get;}
         public SaldoInsuficienteException(string message) : base(message){}
 
-        public SaldoInsuficienteException(double saldo, double valor)
+        public SaldoInsuficienteException(double saldo, double valor) : this("O valor de "+valor+ " não cabe dentro do saldo atual de : "+saldo)
         {
             Valor = valor;
             Saldo = saldo;
