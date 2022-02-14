@@ -88,6 +88,15 @@ namespace ByteBank
             {
                 Console.WriteLine("independentemente, eu apareço");
             }
+
+            /**
+             * 
+             * O negócio using é a mesma coisa que um try .. finally, 
+             * que por sua vez deve ser usado quando você tem um erro que você não 
+             * quer/não pode tratar e decide tratar mais em cima, mas que de qualquer 
+             * forma deixa algo que você tem que fechar, a exemplo de ler arquivos
+             *
+              **/
            
             _saldo -= valor;
             contaDestino.Depositar(valor);
