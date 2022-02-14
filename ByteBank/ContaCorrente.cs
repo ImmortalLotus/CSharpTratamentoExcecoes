@@ -1,5 +1,6 @@
 ﻿// using _05_ByteBank;
 
+using ByteBank.Exceptions;
 using System;
 
 namespace ByteBank
@@ -44,21 +45,20 @@ namespace ByteBank
             }
             Agencia = agencia;
             Numero = numero;
+            TotalDeContasCriadas++;
             TaxaOperacao = 30 / TotalDeContasCriadas;
 
-            TotalDeContasCriadas++;
         }
 
 
-        public bool Sacar(double valor)
+        public void Sacar(double valor)
         {
             if (_saldo < valor)
             {
-                return false;
+                throw new SaldoInsuficienteException("burro não pode ter menos dinheiro do que você quer sacar");
             }
 
             _saldo -= valor;
-            return true;
         }
 
         public void Depositar(double valor)
