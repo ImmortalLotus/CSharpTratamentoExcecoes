@@ -8,6 +8,14 @@ namespace ByteBank.Exceptions
 {
     public class SaldoInsuficienteException : Exception
     {
+        public double Saldo { get;}
+        public double Valor { get;}
         public SaldoInsuficienteException(string message) : base(message){}
+
+        public SaldoInsuficienteException(double saldo, double valor)
+        {
+            Valor = valor;
+            Saldo = saldo;
+        }
     }
 }
