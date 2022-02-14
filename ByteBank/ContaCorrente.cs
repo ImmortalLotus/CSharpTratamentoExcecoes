@@ -84,6 +84,10 @@ namespace ByteBank
             {
                 throw new Exception("O valor de saque excede o valor de dinheiro da conta",ex);
             }
+            finally
+            {
+                Console.WriteLine("independentemente, eu apareço");
+            }
            
             _saldo -= valor;
             contaDestino.Depositar(valor);
