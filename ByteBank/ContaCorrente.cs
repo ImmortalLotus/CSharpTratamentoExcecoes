@@ -1,5 +1,7 @@
 ﻿// using _05_ByteBank;
 
+using System;
+
 namespace ByteBank
 {
     public class ContaCorrente
@@ -8,25 +10,11 @@ namespace ByteBank
 
         public static int TotalDeContasCriadas { get; private set; }
 
+        public static double TaxaOperacao { get; private set; }
 
-        private int _agencia;
-        public int Agencia
-        {
-            get
-            {
-                return _agencia;
-            }
-            set
-            {
-                if (value <= 0)
-                {
-                    return;
-                }
+        public int Agencia{ get; }
 
-                _agencia = value;
-            }
-        }
-        public int Numero { get; set; }
+        public int Numero { get; }
 
         private double _saldo = 100;
 
@@ -50,8 +38,13 @@ namespace ByteBank
 
         public ContaCorrente(int agencia, int numero)
         {
+            if (agencia<=0 || numero <=0)
+            {
+                throw new ArgumentException("Nem agência nem número podem ser nulos, nerd.");
+            }
             Agencia = agencia;
             Numero = numero;
+            TaxaOperacao = 30 / TotalDeContasCriadas;
 
             TotalDeContasCriadas++;
         }

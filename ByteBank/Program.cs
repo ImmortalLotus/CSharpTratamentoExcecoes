@@ -11,6 +11,7 @@ namespace ByteBank
         static void Main(string[] args)
         {
             Console.ReadLine();
+            ContaCorrente c = new ContaCorrente(0,0);
         }
     }
 }
