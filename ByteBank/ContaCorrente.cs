@@ -82,7 +82,7 @@ namespace ByteBank
             }
             catch (SaldoInsuficienteException ex)
             {
-                throw ex;
+                throw new Exception("O valor de saque excede o valor de dinheiro da conta",ex);
             }
            
             _saldo -= valor;
